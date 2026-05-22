@@ -4,6 +4,7 @@ import { setNetworkId } from '@midnight-ntwrk/midnight-js-network-id';
 import {
   deployContract,
   submitCallTx,
+  type DeployedContract,
 } from '@midnight-ntwrk/midnight-js-contracts';
 import type { ContractAddress } from '@midnight-ntwrk/compact-runtime';
 import pino from 'pino';
@@ -13,6 +14,7 @@ import { MidnightWalletProvider, syncWallet } from '../wallet.js';
 import { buildProviders, type HelloWorldProviders } from '../providers.js';
 import {
   CompiledHelloWorldContract,
+  Contract,
   ledger,
   zkConfigPath,
 } from '../../contracts/index.js';
@@ -86,12 +88,12 @@ describe('Hello World Contract', () => {
   it('Deploys the contract', async () => {
     logger.info(`Creating private state...`);
 
-    const deployed: any = await (deployContract as any)(aliceProviders, {
-      compiledContract: CompiledHelloWorldContract,
-      privateStateId: ALICE_PRIVATE_STATE_ID,
-      initialPrivateState: {},
-      args: [],
-    });
+    const deployed: DeployedContract<Contract> = 
+      await (deployContract<Contract>)(aliceProviders, {
+        compiledContract: CompiledHelloWorldContract,
+        privateStateId: ALICE_PRIVATE_STATE_ID,
+        initialPrivateState: {},
+      });
 
     logger.info(`Setting the contract address...`);
     contractAddress = deployed.deployTxData.public.contractAddress;
@@ -105,7 +107,7 @@ describe('Hello World Contract', () => {
   it('Stores Hello World!', async () => {
     const message = "Hello World!";
 
-    await (submitCallTx as any)(aliceProviders, {
+    await (submitCallTx<Contract, 'storeMessage'>)(aliceProviders, {
       compiledContract: CompiledHelloWorldContract,
       contractAddress,
       privateStateId: ALICE_PRIVATE_STATE_ID,

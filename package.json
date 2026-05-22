@@ -7,6 +7,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "compile": "compact compile contracts/hello-world.compact contracts/managed/hello-world",
     "test": "NODE_OPTIONS='--experimental-vm-modules' vitest run",
     "test:local": "MIDNIGHT_NETWORK=local yarn test",
     "env:up": "docker compose up -d --wait",
