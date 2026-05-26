@@ -1,4 +1,4 @@
-// This file is part of example-battleship.
+// This file is part of example-hello-world.
 // Copyright (C) Midnight Foundation
 // SPDX-License-Identifier: Apache-2.0
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@
 // progress.isStrictlyComplete() means "synced to chain tip", not "wallet has
 // funds" — on a fresh devnet it returns at block 0/1 with zero coins, so
 // the first tx fails with Wallet.InsufficientFunds.
+// This script improves the CI workflow.
 
 import pino from 'pino';
 import { setNetworkId } from '@midnight-ntwrk/midnight-js/network-id';
