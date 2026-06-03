@@ -16,8 +16,7 @@
 // Block until Alice has ≥1 spendable DUST coin. syncWallet's
 // progress.isStrictlyComplete() means "synced to chain tip", not "wallet has
 // funds" — on a fresh devnet it returns at block 0/1 with zero coins, so
-// the first tx fails with Wallet.InsufficientFunds.
-// This script improves the CI workflow.
+// the first tx fails with Wallet.InsufficientFunds. This script improves the CI workflow.
 
 import pino from 'pino';
 import { setNetworkId } from '@midnight-ntwrk/midnight-js/network-id';
