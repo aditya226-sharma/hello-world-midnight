@@ -350,6 +350,16 @@
     "@midnight-ntwrk/midnight-js-network-id" "4.0.4"
     "@scure/base" "^2.0.0"
 
+"@midnight-ntwrk/midnight-js@4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@midnight-ntwrk/midnight-js/-/midnight-js-4.0.4.tgz#8ecd1fed4c9b393c9e797cb0d0e4d1debd648c54"
+  integrity sha512-wCLA674IiPPDjt/XTs4jumoUtyVTQ5W7nvUCHHm6yRtFkTtLWEsbPalo1Ozcl9nljKz9pomlpfoq4zPavoKIWg==
+  dependencies:
+    "@midnight-ntwrk/midnight-js-contracts" "4.0.4"
+    "@midnight-ntwrk/midnight-js-network-id" "4.0.4"
+    "@midnight-ntwrk/midnight-js-types" "4.0.4"
+    "@midnight-ntwrk/midnight-js-utils" "4.0.4"
+
 "@midnight-ntwrk/onchain-runtime-v3@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@midnight-ntwrk/onchain-runtime-v3/-/onchain-runtime-v3-3.0.0.tgz#6b9ddf0dc09c8040175e5b40433bf0ff79425d72"
