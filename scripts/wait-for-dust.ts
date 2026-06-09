@@ -19,14 +19,14 @@
 // the first tx fails with Wallet.InsufficientFunds. This script improves the CI workflow.
 
 import pino from 'pino';
-import { setNetworkId } from '@midnight-ntwrk/midnight-js/network-id';
+import { setNetworkId } from '@midnight-ntwrk/midnight-js-network-id';
 import type { EnvironmentConfiguration } from '@midnight-ntwrk/testkit-js';
 import { firstValueFrom, throwError } from 'rxjs';
 import { filter, take, tap, timeout } from 'rxjs/operators';
 import { getConfig } from '../src/config.js';
 import { MidnightWalletProvider, syncWallet } from '../src/wallet.js';
 
-// Must match src/test/battleship.test.ts.
+// Must match src/test/hw.test.ts.
 const ALICE_SEED = '0000000000000000000000000000000000000000000000000000000000000001';
 
 const logger = pino({
