@@ -121,4 +121,17 @@ The test script will begin to show output from your local devnet and will progre
    ✓ Hello World Contract > Stores Hello World!   18184ms
 ```
 
+Stop the Docker container:
+```bash
+yarn env:down
+```
+
 Hello World! You are now ready to explore [Tutorials](https://docs.midnight.network/category/tutorials) for more detailed instructions on building DApps on Midnight!
+
+## Deploy Contract to Live Testnet
+
+To run this test script on Preview or Preprod:
+1. Generate a wallet on the given network and fund it with tNIGHT and tDUST. See [Environments and endpoints](https://docs.midnight.network/relnotes/network) for faucet links.
+1. Create `.env.<network>` and populate it based on the information in `.env.<network>.example` in this repository.
+1. Start the proof server: `yarn proof:up`
+1. Start the test: `yarn test:<network>` -- the wallet will sync to the network and advance the test suite programmatically.
