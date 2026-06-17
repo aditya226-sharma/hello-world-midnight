@@ -18,19 +18,27 @@ import {
   type EnvironmentConfiguration,
   FluentWalletBuilder,
 } from '@midnight-ntwrk/testkit-js';
+import type { UnshieldedKeystore } from '@midnight-ntwrk/wallet-sdk';
 import * as Rx from 'rxjs';
 import type { Logger } from 'pino';
 
+export type WalletSecret =
+  | { kind: 'seed'; value: string }
+  | { kind: 'mnemonic'; value: string };
+
 export class MidnightWalletProvider implements MidnightProvider, WalletProvider {
   readonly wallet: WalletFacade;
+  readonly unshieldedKeystore: UnshieldedKeystore;
 
   private constructor(
     private readonly logger: Logger,
     wallet: WalletFacade,
     private readonly zswapSecretKeys: ZswapSecretKeys,
     private readonly dustSecretKey: DustSecretKey,
+    unshieldedKeystore: UnshieldedKeystore,
   ) {
     this.wallet = wallet;
+    this.unshieldedKeystore = unshieldedKeystore;
   }
 
   getCoinPublicKey(): CoinPublicKey {
@@ -72,7 +80,7 @@ export class MidnightWalletProvider implements MidnightProvider, WalletProvider 
   static async build(
     logger: Logger,
     env: EnvironmentConfiguration,
-    seed: string,
+    secret: WalletSecret,
   ): Promise<MidnightWalletProvider> {
     const dustOptions: DustWalletOptions = {
       ledgerParams: LedgerParameters.initialParameters(),
@@ -80,26 +88,34 @@ export class MidnightWalletProvider implements MidnightProvider, WalletProvider 
       feeBlocksMargin: 5,
     };
 
-    const builder = FluentWalletBuilder.forEnvironment(env)
+    const base = FluentWalletBuilder.forEnvironment(env)
       .withDustOptions(dustOptions);
+    const builder =
+      secret.kind === 'mnemonic'
+        ? base.withMnemonic(secret.value)
+        : base.withSeed(secret.value);
 
-    const buildResult = await builder.withSeed(seed).buildWithoutStarting();
-    const { wallet, seeds } = buildResult as {
+    const buildResult = await builder.buildWithoutStarting();
+    const { wallet, seeds, keystore } = buildResult as {
       wallet: WalletFacade;
       seeds: {
         masterSeed: string;
         shielded: Uint8Array;
         dust: Uint8Array;
       };
+      keystore: UnshieldedKeystore;
     };
 
-    logger.info(`Wallet built from seed: ${seeds.masterSeed.slice(0, 8)}...`);
+    logger.info(
+      `Wallet built from ${secret.kind}; master seed: ${seeds.masterSeed.slice(0, 8)}...`,
+    );
 
     return new MidnightWalletProvider(
       logger,
       wallet,
       ZswapSecretKeys.fromSeed(seeds.shielded),
       DustSecretKey.fromSeed(seeds.dust),
+      keystore,
     );
   }
 }
