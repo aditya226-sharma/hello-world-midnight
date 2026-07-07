@@ -6,19 +6,18 @@ import {
   LedgerParameters,
   ZswapSecretKeys,
 } from '@midnight-ntwrk/midnight-js-protocol/ledger';
-import {
-  type MidnightProvider,
-  type UnboundTransaction,
-  type WalletProvider,
+import type {
+  MidnightProvider,
+  UnboundTransaction,
+  WalletProvider,
 } from '@midnight-ntwrk/midnight-js-types';
 import { ttlOneHour } from '@midnight-ntwrk/midnight-js-utils';
-import { type WalletFacade, type FacadeState } from '@midnight-ntwrk/wallet-sdk-facade';
+import type { WalletFacade, FacadeState, UnshieldedKeystore } from '@midnight-ntwrk/wallet-sdk';
 import {
   type DustWalletOptions,
   type EnvironmentConfiguration,
   FluentWalletBuilder,
 } from '@midnight-ntwrk/testkit-js';
-import type { UnshieldedKeystore } from '@midnight-ntwrk/wallet-sdk';
 import * as Rx from 'rxjs';
 import type { Logger } from 'pino';
 
