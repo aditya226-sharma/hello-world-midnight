@@ -131,7 +131,7 @@ Hello World! You are now ready to explore [Tutorials](https://docs.midnight.netw
 ## Deploy Contract to Live Testnet
 
 To run this test script on Preview or Preprod:
-1. Generate a wallet on the given network and fund it with tNIGHT and tDUST. See [Environments and endpoints](https://docs.midnight.network/relnotes/network) for faucet links.
+1. Generate a wallet on the given network and fund it manually via the network's faucet page — [Preview](https://midnight-tmnight-preview.nethermind.dev/) or [Preprod](https://midnight-tmnight-preprod.nethermind.dev/). The faucet is a human-facing web page (no programmatic drip endpoint), so the test suite assumes the seed you supply is already funded with tNIGHT. tDUST can be delegated in 1AM or Lace Carbon (coming soon). See [Environments and endpoints](https://docs.midnight.network/relnotes/network) for reference.
 1. Create `.env.<network>` and populate it based on the information in `.env.<network>.example` in this repository.
 1. Start the proof server: `yarn proof:up`
 1. Start the test: `yarn test:<network>` -- the wallet will sync to the network and advance the test suite programmatically.
