@@ -498,7 +498,7 @@
     effect "^3.19.19"
     rxjs "^7.8.2"
 
-"@midnight-ntwrk/wallet-sdk-utilities@1.2.1", "@midnight-ntwrk/wallet-sdk-utilities@^1.2.0":
+"@midnight-ntwrk/wallet-sdk-utilities@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@midnight-ntwrk/wallet-sdk-utilities/-/wallet-sdk-utilities-1.2.1.tgz#7a3d22615866b1759f26d7d10236a8e16750cbf0"
   integrity sha512-K85cpwKGpAbc4hb7EnlxyGOHNqYLFYZwsxm3AMjIdDglxWYCn04HmuTQiq5SQyWc5WlAgSMomQBGGg4z3vlp4A==
@@ -506,7 +506,7 @@
     effect "^3.19.19"
     rxjs "^7.8.2"
 
-"@midnight-ntwrk/wallet-sdk@1.1.0", "@midnight-ntwrk/wallet-sdk@1.2.0", "@midnight-ntwrk/wallet-sdk@^1.2.0":
+"@midnight-ntwrk/wallet-sdk@1.1.0", "@midnight-ntwrk/wallet-sdk@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@midnight-ntwrk/wallet-sdk/-/wallet-sdk-1.2.0.tgz#d36089c949432316233a63400fe46ed7df3020f8"
   integrity sha512-9dswqwD4WVgOcXgsDT63a0NTCePaoT5KSU3fZBqVqk0nDyiLOefT0FGzKI1efOm/EQlcCzBZ+jeMOKYRFzhM4w==
