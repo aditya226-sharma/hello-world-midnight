@@ -130,6 +130,29 @@ function isProgressStrictlyComplete(progress: unknown): boolean {
   return (candidate.isStrictlyComplete as () => boolean)();
 }
 
+// Renders sync status as "<complete> (n/m)" where n is the applied index and
+// m is the target the wallet must reach for isStrictlyComplete() to be true.
+// Shielded/dust progress uses appliedIndex/highestRelevantWalletIndex; the
+// unshielded wallet uses appliedId/highestTransactionId.
+function formatProgress(progress: unknown): string {
+  const complete = isProgressStrictlyComplete(progress);
+  if (!progress || typeof progress !== 'object') {
+    return `${complete}`;
+  }
+  const p = progress as {
+    appliedIndex?: bigint;
+    highestRelevantWalletIndex?: bigint;
+    appliedId?: bigint;
+    highestTransactionId?: bigint;
+  };
+  const applied = p.appliedIndex ?? p.appliedId;
+  const target = p.highestRelevantWalletIndex ?? p.highestTransactionId;
+  if (applied === undefined || target === undefined) {
+    return `${complete}`;
+  }
+  return `${complete} (${applied}/${target})`;
+}
+
 export async function syncWallet(
   logger: Logger,
   wallet: WalletFacade,
@@ -145,7 +168,8 @@ export async function syncWallet(
         const unshielded = isProgressStrictlyComplete(state.unshielded.progress);
         const dust = isProgressStrictlyComplete(state.dust.state.progress);
         logger.info(
-          `Wallet sync [${emissionCount}]: shielded=${shielded}, unshielded=${unshielded}, dust=${dust}`,
+          `Wallet sync [${emissionCount}]: shielded=${formatProgress(state.shielded.state.progress)}, ` +
+            `unshielded=${formatProgress(state.unshielded.progress)}, dust=${formatProgress(state.dust.state.progress)}`,
         );
         if (!shielded) {
           logger.debug(`  shielded.progress: ${JSON.stringify(state.shielded.state.progress)}`);
