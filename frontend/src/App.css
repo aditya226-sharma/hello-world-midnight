@@ -1,0 +1,276 @@
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --accent: #6c63ff;
+  --accent-hover: #5a52e0;
+  --success: #4caf50;
+  --error: #f44336;
+  --border: #2a2a3e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wallet-connect,
+.wallet-connected,
+.contract-interaction,
+.info-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.contract-interaction.disabled {
+  opacity: 0.6;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-connect {
+  background: var(--accent);
+  color: white;
+  width: 100%;
+}
+
+.btn-connect:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-disconnect {
+  background: transparent;
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.btn-disconnect:hover:not(:disabled) {
+  background: var(--error);
+  color: white;
+}
+
+.btn-store,
+.btn-read {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-store:hover:not(:disabled),
+.btn-read:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.wallet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.wallet-connected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wallet-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.wallet-address {
+  font-family: monospace;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+.wallet-balance,
+.wallet-network {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.message-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.message-display {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.message-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.message-value {
+  font-size: 1.1rem;
+  color: var(--success);
+}
+
+.tx-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.tx-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.tx-hash {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.error {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+.info-section p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.tech-stack ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tech-stack li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.app-footer p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.app-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+.contract-section {
+  margin-bottom: 1.5rem;
+}
+
+.contract-section:last-of-type {
+  margin-bottom: 0;
+}
