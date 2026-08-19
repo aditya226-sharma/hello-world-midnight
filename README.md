@@ -108,7 +108,7 @@ cd frontend && npx vite build
 The `hello-world.compact` contract stores and retrieves messages on-chain:
 
 ```compact
-pragma language_version 0.25;
+pragma language_version 0.23;
 
 export ledger message: Opaque<"string">;
 
@@ -116,6 +116,31 @@ export circuit storeMessage(newMessage: Opaque<"string">): [] {
   message = disclose(newMessage);
 }
 ```
+
+## Public State vs Private Witness
+
+Midnight uses a **dual-state architecture** separating public and private data:
+
+- **Public State (Ledger):** The `message` field is declared with `export ledger`, making it publicly visible on the blockchain. Anyone can query the contract state and read the stored message. This is the data that gets committed to the chain's public ledger.
+
+- **Private Witness:** In this contract, the `storeMessage` circuit takes a `newMessage` parameter that is processed privately. The `disclose()` function is the deliberate boundary between private and public — it's the only mechanism that reveals data. Without `disclose()`, the parameter would remain private. The witness (off-chain state) is never stored on-chain; only the result of `disclose()` becomes public.
+
+This design demonstrates Midnight's core principle: **privacy is the default**. Data stays private unless you explicitly choose to disclose it using `disclose()`.
+
+## Screenshots
+
+### Compile Output
+![Compile Output](docs/screenshots/compile-output.png)
+
+### Contract Deployed (Local Devnet)
+![Deploy Output](docs/screenshots/deploy-output.png)
+
+### Frontend Tests Passing
+![Tests](docs/screenshots/tests-passing.png)
+
+## Initial Product Idea
+
+**Hello World Messenger** — A privacy-first messaging dApp on Midnight where users can store encrypted messages on-chain. Messages are only visible to the sender and intended recipients using Midnight's selective disclosure. The contract demonstrates the fundamental building block: storing data with configurable privacy. Future iterations could add multi-party messaging, time-locked messages, and access-controlled message boards — all with privacy as the default, not an afterthought.
 
 ## Testing
 
