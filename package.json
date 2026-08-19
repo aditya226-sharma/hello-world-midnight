@@ -17,6 +17,7 @@
     "proof:up": "docker compose up -d --wait proof-server",
     "proof:down": "docker compose stop proof-server",
     "wait:dust": "vite-node scripts/wait-for-dust.ts",
+    "deploy:preprod": "MIDNIGHT_NETWORK=preprod NODE_OPTIONS='--experimental-vm-modules' vitest run --reporter=verbose",
     "validate": "yarn env:up && yarn test:local; yarn env:down"
   },
   "dependencies": {
