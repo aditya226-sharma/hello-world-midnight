@@ -2,6 +2,8 @@
 
 A privacy-first Hello World dApp built on Midnight blockchain using Compact smart contracts.
 
+**Live Demo:** https://aditya226-sharma.github.io/hello-world-midnight/
+
 Built for [New Moon to Full: Monthly Moonshots on Midnight](https://www.risein.com/programs/new-moon-to-full-monthly-moonshots-on-midnight) program.
 
 ## Project Structure
@@ -117,13 +119,15 @@ export circuit storeMessage(newMessage: Opaque<"string">): [] {
 }
 ```
 
-## Public State vs Private Witness
+## Public State vs Private Witness (Privacy Claim)
 
 Midnight uses a **dual-state architecture** separating public and private data:
 
 - **Public State (Ledger):** The `message` field is declared with `export ledger`, making it publicly visible on the blockchain. Anyone can query the contract state and read the stored message. This is the data that gets committed to the chain's public ledger.
 
 - **Private Witness:** In this contract, the `storeMessage` circuit takes a `newMessage` parameter that is processed privately. The `disclose()` function is the deliberate boundary between private and public — it's the only mechanism that reveals data. Without `disclose()`, the parameter would remain private. The witness (off-chain state) is never stored on-chain; only the result of `disclose()` becomes public.
+
+**Observable Privacy Behavior:** When a user calls `storeMessage`, the message content is sent as a private witness. Only after `disclose()` is called does the message become visible on-chain. This demonstrates that data remains private by default on Midnight — you must explicitly choose to reveal it. A second call to `storeMessage` with a different message will overwrite the previous one, and the old message becomes inaccessible, proving that private state is not leaked.
 
 This design demonstrates Midnight's core principle: **privacy is the default**. Data stays private unless you explicitly choose to disclose it using `disclose()`.
 
