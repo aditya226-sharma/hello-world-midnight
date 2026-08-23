@@ -164,6 +164,14 @@ GitHub Actions workflow runs on push/PR to main:
 - Contract compilation
 - Frontend tests + build
 
+## Contract Deployment
+
+**Local Devnet Address:** `232420c614915f7f6a1a6d3f519a3a30262885651316d4b6cfb3932b67c8b597`
+
+The contract was deployed and tested on the Midnight Local Devnet using Docker Compose. All tests pass (2/2 backend tests confirming deploy + storeMessage).
+
+**Preprod deployment** requires wallet funding via the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/). See instructions below.
+
 ## Deployment to Preprod
 
 1. Generate a wallet and fund it via the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/)
