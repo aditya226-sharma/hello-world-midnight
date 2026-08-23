@@ -1,5 +1,7 @@
 # Hello World on Midnight
 
+[![CI](https://github.com/aditya226-sharma/hello-world-midnight/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya226-sharma/hello-world-midnight/actions/workflows/ci.yml)
+
 A privacy-first Hello World dApp built on Midnight blockchain using Compact smart contracts.
 
 **Live Demo:** https://aditya226-sharma.github.io/hello-world-midnight/
@@ -166,18 +168,13 @@ GitHub Actions workflow runs on push/PR to main:
 
 ## Contract Deployment
 
+**Preprod Contract Address:** `02003e49ae109d66ec2282b5b5b0ad8b6c6da04c89b9e6c3e85e68db64f7c43e5c64`
+**Network:** Midnight Preprod
+
 **Local Devnet Address:** `232420c614915f7f6a1a6d3f519a3a30262885651316d4b6cfb3932b67c8b597`
+**Network:** Midnight Local Devnet
 
-The contract was deployed and tested on the Midnight Local Devnet using Docker Compose. All tests pass (2/2 backend tests confirming deploy + storeMessage).
-
-**Preprod deployment** requires wallet funding via the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/). See instructions below.
-
-## Deployment to Preprod
-
-1. Generate a wallet and fund it via the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/)
-2. Create `.env.preprod` with your seed/mnemonic
-3. Start proof server: `yarn proof:up`
-4. Deploy: `yarn test:preprod`
+The contract was deployed and tested on both Midnight Preprod and the Local Devnet using Docker Compose. All backend tests pass (deploy + storeMessage), confirming the contract compiles, deploys, and transitions state correctly on-chain.
 
 ## Tech Stack
 

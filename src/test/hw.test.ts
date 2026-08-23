@@ -175,4 +175,23 @@ describe(`Hello World Contract (${network})`, () => {
     const state = await queryLedger(providers);
     expect(state.message).toEqual(message);
   });
+
+  it('Privacy model: public ledger does not expose private witness data', async () => {
+    const state = await queryLedger(providers);
+
+    // The public ledger should only contain the disclosed 'message' field.
+    // Private witness data (internal circuit state, proofs, nonces) must NOT appear.
+    const ledgerKeys = Object.keys(state);
+    expect(ledgerKeys).toContain('message');
+
+    // The ledger should not leak any private circuit internals
+    const knownPrivateFields = ['witness', 'proof', 'nonce', 'secret', 'privateKey', 'input'];
+    for (const key of ledgerKeys) {
+      expect(knownPrivateFields).not.toContain(key.toLowerCase());
+    }
+
+    // Verify that only the explicitly disclosed message is visible
+    expect(state.message).toEqual('Hello World!');
+    expect(ledgerKeys.length).toBeLessThanOrEqual(2);
+  });
 });
